@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         txtEmailLogin = (EditText) findViewById(R.id.txtemaillogin);
         txtPwd = (EditText) findViewById(R.id.txtpasswordlogin);
         firebaseAuth = FirebaseAuth.getInstance();
+        this.setTitle("Log in");
     }
 
     public void btnUserLogin_Click(View v) {

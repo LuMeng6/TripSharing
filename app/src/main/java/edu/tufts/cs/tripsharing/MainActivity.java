@@ -2,6 +2,7 @@ package edu.tufts.cs.tripsharing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,7 +13,7 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String placeId;
+    private String placeId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         // You need transfer the bitmap you get into the info class
 
         Intent i = new Intent(MainActivity.this, info.class);
-        i.putExtra("PlaceId", placeId);
-        //Ask Menglu how to pass the bitmaps she get in this activity to info activity
 
-
-        startActivity(i);
+        if (placeId != "") {
+            i.putExtra("PlaceId", placeId);
+            startActivity(i);
+        }
     }
 
 }
