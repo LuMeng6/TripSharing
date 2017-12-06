@@ -13,11 +13,12 @@
         android:layout_below="@+id/txtemailregistration"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="62dp"
-        android:text="Password:"
+        android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/txtpasswordregistration"
         app:layout_constraintLeft_toLeftOf="@+id/txtpasswordregistration"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -26,11 +27,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Email Address:"
+        android:text="Email Address"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:textSize="20dp"/>
 
     <EditText
         android:id="@+id/txtemailregistration"

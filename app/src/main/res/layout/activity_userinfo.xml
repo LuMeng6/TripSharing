@@ -16,7 +16,7 @@
         android:layout_alignStart="@+id/username"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:hint="            xxx-xxx-xxxx"
+        android:hint="Please Input Contact Info"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="@+id/username"
         app:layout_constraintRight_toRightOf="@+id/username"
@@ -47,11 +47,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
-        android:text="name "
+        android:text="Name "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/textView8"
@@ -60,11 +61,12 @@
         android:layout_above="@+id/usercontact"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="12dp"
-        android:text="contact me "
+        android:text="Contact Me "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/usercontact"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:textSize="20dp"/>
 
     <Button
         android:id="@+id/save"

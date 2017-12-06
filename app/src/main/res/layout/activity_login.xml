@@ -14,20 +14,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="136dp"
-        android:text="Password:"
+        android:text="Password"
         app:layout_constraintBottom_toTopOf="@+id/txtpasswordlogin"
         app:layout_constraintLeft_toLeftOf="@+id/txtpasswordlogin"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btnUserLogin"
-        android:layout_marginTop="28dp"
-        android:text="Email Address:"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Email Address"
+        android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"

@@ -72,14 +72,6 @@ public class userinfoActivity extends AppCompatActivity {
                 String name = uName.getText().toString();
                 String contact = uContact.getText().toString();
 
-                if (contact.length() != 12)
-                    toastMessage("invalid phone number");
-                else {
-                Log.d(TAG, "onClick: Attempting to submit to database: \n" +
-                        "name: " + name + "\n" +
-                        "email: " + contact + "\n"
-                );
-
                 //handle the exception if the EditText fields are null
                 if(!name.equals("") && !contact.equals("") ){
                     UserInformation userInformation = new UserInformation(name,contact);
@@ -92,7 +84,6 @@ public class userinfoActivity extends AppCompatActivity {
                 }
                 Intent i = new Intent(userinfoActivity.this, MainActivity.class);
                 startActivity(i);
-                }
             }
         });
 

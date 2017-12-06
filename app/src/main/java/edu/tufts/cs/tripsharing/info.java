@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,7 +83,6 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
 
         placePhotosTask(place_id, viewPager, this);
 
-
         Comment.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -154,8 +154,6 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                 alert(databaseError.toString());
             }
         });
-
-
 
     }
 

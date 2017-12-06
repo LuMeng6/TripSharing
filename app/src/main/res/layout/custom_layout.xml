@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/common_full_open_on_phone"
-        android:layout_weight="0.21" />
+        android:layout_height="250dp"
+        android:layout_weight="0.21"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/common_full_open_on_phone" />
 </LinearLayout>
