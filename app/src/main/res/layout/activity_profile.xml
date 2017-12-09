@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tainingzhang.tripsharing_v0.edu.example.tainingzhang.tripsharing_v0.profileActivity"
+    tools:context="edu.tufts.cs.tripsharing.ProfileActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
@@ -44,5 +44,6 @@
         android:text="Information"
         app:layout_constraintStart_toEndOf="@+id/tvEmailProfile"
         app:layout_constraintTop_toBottomOf="@+id/tvEmailProfile" />
+
 </android.support.constraint.ConstraintLayout>
 

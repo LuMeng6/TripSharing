@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-public class profileActivity extends AppCompatActivity {
+/* The screen of welcome page after logging in (the secondary functionality, not completed). */
+
+public class ProfileActivity extends AppCompatActivity {
 
     private TextView tvEmail;
     @Override
@@ -18,7 +20,7 @@ public class profileActivity extends AppCompatActivity {
     }
 
     public void btnInfo_Click(View v) {
-        Intent i = new Intent(profileActivity.this, userinfoActivity.class);
+        Intent i = new Intent(ProfileActivity.this, UserInfoActivity.class);
         startActivity(i);
     }
 }

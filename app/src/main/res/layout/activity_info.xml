@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tainingzhang.tripsharing_v0.edu.example.tainingzhang.tripsharing_v0.info">
-
+    tools:context="edu.tufts.cs.tripsharing.Info">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
@@ -21,12 +20,12 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
+
     <Space
         android:id="@+id/space2"
         android:layout_below="@+id/SlideDots"
@@ -48,10 +47,9 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-
+        android:layout_above="@+id/button2"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3">
-
     </ListView>
 
 
@@ -59,8 +57,20 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
+        android:layout_alignParentStart="true"
         android:onClick="viewOnClick"
-        android:text="view people want to go there"
+        android:text="view people who want to go there"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="Not Interest"
+        android:onClick="back_to_search"
+        android:layout_weight="1"/>
+
 </RelativeLayout>

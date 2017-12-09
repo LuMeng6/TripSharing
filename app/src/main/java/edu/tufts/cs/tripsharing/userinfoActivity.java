@@ -15,8 +15,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/* The screen of user's information when signing up. */
 
-public class userinfoActivity extends AppCompatActivity {
+public class UserInfoActivity extends AppCompatActivity {
 
     private static final String TAG = "AddToDatabase";
 
@@ -41,7 +42,7 @@ public class userinfoActivity extends AppCompatActivity {
         uContact = (EditText) findViewById(R.id.usercontact);
 
         //declare the database reference object. This is what we use to access the database.
-        //NOTE: Unless you are signed in, this will not be useable.
+        //NOTE: Unless you are signed in, this will not be usable.
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
@@ -61,7 +62,6 @@ public class userinfoActivity extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                     toastMessage("Successfully signed out.");
                 }
-                // ...
             }
         };
 
@@ -76,14 +76,15 @@ public class userinfoActivity extends AppCompatActivity {
                 if(!name.equals("") && !contact.equals("") ){
                     UserInformation userInformation = new UserInformation(name,contact);
                     myRef.child("users").child(userID).setValue(userInformation);
-                    toastMessage("New Information has been saved.");
+                    toastMessage("User's information has been saved.");
                     uName.setText("");
                     uContact.setText("");
                 }else{
-                    toastMessage("Fill out all the fields");
+                    toastMessage("Please fill out all the fields");
                 }
-                Intent i = new Intent(userinfoActivity.this, MainActivity.class);
-                startActivity(i);
+                if(!name.equals("") && !contact.equals("") ) {
+                    Intent i = new Intent(UserInfoActivity.this, MainActivity.class);
+                    startActivity(i);}
             }
         });
 
@@ -103,11 +104,6 @@ public class userinfoActivity extends AppCompatActivity {
         }
     }
 
-
-    /**
-     * customizable toast
-     * @param message
-     */
     private void toastMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }

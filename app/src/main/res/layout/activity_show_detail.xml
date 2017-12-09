@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.tainingzhang.tripsharing_v0.edu.example.tainingzhang.tripsharing_v0.showDetail">
-
-
+    tools:context="edu.tufts.cs.tripsharing.ShowDetail">
 
     <ListView
         android:id="@+id/userListView"
         android:layout_width="match_parent"
+        android:layout_height="410dp"
         android:layout_weight="10"
-        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 
@@ -24,4 +22,13 @@
         android:layout_marginBottom="3dp"
         android:layout_weight="1"
         android:text="Join Them" />
+
+    <Button
+        android:id="@+id/NotInterest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="back_to_search"
+        android:text="Not Interest" />
+
 </LinearLayout>

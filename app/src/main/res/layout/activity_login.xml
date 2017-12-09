@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tainingzhang.tripsharing_v0.edu.example.tainingzhang.tripsharing_v0.LoginActivity">
-
+    tools:context="edu.tufts.cs.tripsharing.LoginActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -87,9 +86,8 @@
         android:id="@+id/btnRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btnUserLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_alignEnd="@+id/textView3"
+        android:layout_below="@+id/textView6"
         android:onClick="btnRegistration_Click"
         android:text="sign up"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -99,5 +97,14 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtpasswordlogin"
+        android:layout_below="@+id/btnUserLogin"
+        android:layout_marginTop="11dp"
+        android:text="Don't have an account? Try this: "
+        android:textSize="15dp" />
 
 </RelativeLayout>

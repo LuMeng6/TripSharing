@@ -10,10 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import io.fabric.sdk.android.Fabric;
+
+/* The screen of logging in. */
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_login);
         txtEmailLogin = (EditText) findViewById(R.id.txtemaillogin);
         txtPwd = (EditText) findViewById(R.id.txtpasswordlogin);
@@ -32,23 +37,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void btnUserLogin_Click(View v) {
-        //final ProgressDialog progressDialog = ProgressDialog.show(Login3Activity.this, "Please wait...", "Proccessing...", true);
-        if (  ( !txtEmailLogin.getText().toString().equals("")) && ( !txtPwd.getText().toString().equals(""))  ) {
-            (firebaseAuth.signInWithEmailAndPassword(txtEmailLogin.getText().toString(), txtPwd.getText().toString()))
+        if (( !txtEmailLogin.getText().toString().equals("")) &&
+                ( !txtPwd.getText().toString().equals(""))) {
+            (firebaseAuth.signInWithEmailAndPassword(txtEmailLogin.getText().toString(),
+                    txtPwd.getText().toString()))
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            //progressDialog.dismiss();
-
                             if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Login successful",
+                                        Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 i.putExtra("Email", firebaseAuth.getCurrentUser().getEmail());
                                 startActivity(i);
-                            } else {
+                            }
+                            else {
                                 Log.e("ERROR", task.getException().toString());
-                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -56,7 +62,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void btnRegistration_Click(View v) {
-        Intent i = new Intent(LoginActivity.this, RegitrationActivity.class);
+        Intent i = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(i);
     }
+
+//    public void forceCrash(View view) {
+//        throw new RuntimeException("This is a crash");
+//    }
+    
 }

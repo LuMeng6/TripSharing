@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class info extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+/* The screen of the result of searching, including photos and comments. */
+
+public class Info extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     ViewPager viewPager;
     LinearLayout slideDotspanel;
@@ -50,30 +51,27 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
     private FirebaseAuth firebaseAuth;
     Context context;
     String place_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         firebaseAuth = FirebaseAuth.getInstance();
         context = this;
         place_id = getIntent().getExtras().getString("PlaceId");
-        //place_id = "12345678"; // you should get this id from the main activity;
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
 
         DatabaseReference place = myRef.child("Place").child(place_id);
-        final DatabaseReference user = myRef.child("users").child(firebaseAuth.getCurrentUser().getUid().toString());
+        final DatabaseReference user = myRef.child("users").
+                child(firebaseAuth.getCurrentUser().getUid().toString());
         final DatabaseReference Comment = place.child("Comments");
 
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         slideDotspanel = (LinearLayout) findViewById(R.id.SlideDots);
 
-        // store the image get from Menglu to this array
-        //
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -94,6 +92,7 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                     usernames.add(comment.child("user").getValue(String.class));
                     contents.add(comment.child("Content").getValue(String.class));
                 }
+
                 alert(usernames.size() + "");
                 final String[] userName = new String[usernames.size() + 1];
                 String[] comments = new String[contents.size() + 1];
@@ -101,14 +100,16 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                     userName[i] = usernames.get(i);
                     comments[i] = contents.get(i);
                 }
-                final CustomListAdapter listAdapter = new CustomListAdapter(context, userName, comments);
+
+                final CustomListAdapter listAdapter =
+                        new CustomListAdapter(context, userName, comments);
                 listView = (ListView) findViewById(R.id.listView);
                 listView.setAdapter(listAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         if(i == listAdapter.getCount() - 1) {
-                            AlertDialog.Builder mBuilder = new AlertDialog.Builder(info.this);
+                            AlertDialog.Builder mBuilder = new AlertDialog.Builder(Info.this);
                             View mView = getLayoutInflater().inflate(R.layout.dialog_comments, null);
                             final EditText editText = (EditText)mView.findViewById(R.id.editText);
                             Button btn = (Button) mView.findViewById(R.id.btnComment);
@@ -122,7 +123,11 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
 
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
-                                            String userName = dataSnapshot.child("name").getValue().toString();
+                                            String userName;
+                                            if (dataSnapshot.child("name").getValue() == null)
+                                                userName = "Anonymity";
+                                            else
+                                                userName = dataSnapshot.child("name").getValue().toString();
                                             String comments = editText.getText().toString();
 
                                             Comments c = new Comments(userName, comments);
@@ -141,9 +146,6 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                                 }
 
                             });
-//                            mBuilder.setView(mView);
-//                            AlertDialog dialog = mBuilder.create();
-//                            dialog.show();
                         }
                     }
                 });
@@ -158,7 +160,7 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
     }
 
     public void viewOnClick(View v) {
-        Intent i = new Intent(getApplicationContext(), showDetail.class);
+        Intent i = new Intent(getApplicationContext(), ShowDetail.class);
         i.putExtra("PlaceId", place_id);
         startActivity(i);
     }
@@ -177,6 +179,7 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
     abstract class PhotoTask extends AsyncTask<String, Void, PhotoTask.AttributedPhoto> {
 
         private int mHeight;
@@ -259,21 +262,25 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                     for(int i = 0; i < dotscount; i++) {
 
                         dots[i] = new ImageView(context);
-                        dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+                        dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                                R.drawable.nonactive_dot));
 
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                                (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                         params.setMargins(8, 0, 8, 0);
 
                         slideDotspanel.addView(dots[i], params);
                     }
 
-                    dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+                    dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
+                            R.drawable.active_dot));
 
                     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
                         @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                        public void onPageScrolled(int position, float positionOffset,
+                                                   int positionOffsetPixels) {
 
                         }
 
@@ -281,10 +288,12 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
                         public void onPageSelected(int position) {
 
                             for(int i = 0; i < dotscount; i++) {
-                                dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+                                dots[i].setImageDrawable(ContextCompat.getDrawable
+                                        (getApplicationContext(), R.drawable.nonactive_dot));
                             }
 
-                            dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+                            dots[position].setImageDrawable(ContextCompat.getDrawable
+                                    (getApplicationContext(), R.drawable.active_dot));
 
                         }
 
@@ -293,11 +302,16 @@ public class info extends AppCompatActivity implements GoogleApiClient.OnConnect
 
                         }
                     });
-
                 }
             }
         }.execute(placeId);
     }
+
+    public void back_to_search(View v) {
+        Intent i = new Intent(Info.this, MainActivity.class);
+        startActivity(i);
+    }
+
 }
 
 class Comments{
@@ -308,5 +322,6 @@ class Comments{
         this.user = user;
     }
 }
+
 
 

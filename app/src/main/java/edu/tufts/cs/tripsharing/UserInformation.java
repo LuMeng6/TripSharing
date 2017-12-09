@@ -1,14 +1,11 @@
 package edu.tufts.cs.tripsharing;
 
-/**
- * Created by wanqingchen on 11/8/17.
- */
+/* To store the information of the user. */
 
 public class UserInformation {
 
     private String name;
     private String contact;
-
 
     public UserInformation() {
 

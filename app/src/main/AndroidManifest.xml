@@ -27,18 +27,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.tufts.cs.tripsharing.info"
+            android:name="edu.tufts.cs.tripsharing.Info"
             android:label="@string/title_activity_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="edu.tufts.cs.tripsharing.showDetail" />
+        <activity android:name="edu.tufts.cs.tripsharing.ShowDetail" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCpFj_fVGrZ-ZhTvyqFM7QyqPYdaFItoZg" />
 
-        <activity android:name="edu.tufts.cs.tripsharing.profileActivity" />
-        <activity android:name="edu.tufts.cs.tripsharing.userinfoActivity" />
-        <activity android:name="edu.tufts.cs.tripsharing.RegitrationActivity"></activity>
+        <activity android:name="edu.tufts.cs.tripsharing.ProfileActivity" />
+        <activity android:name="edu.tufts.cs.tripsharing.UserInfoActivity" />
+        <activity android:name="edu.tufts.cs.tripsharing.RegistrationActivity"></activity>
     </application>
 
 </manifest>

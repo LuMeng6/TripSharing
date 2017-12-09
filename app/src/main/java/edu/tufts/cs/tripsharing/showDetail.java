@@ -1,6 +1,7 @@
 package edu.tufts.cs.tripsharing;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,14 +20,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/* The screen of the list of people who want to go to one place. */
 
-public class showDetail extends AppCompatActivity {
+public class ShowDetail extends AppCompatActivity {
+
     private FirebaseAuth firebaseAuth;
     FirebaseDatabase database;
     DatabaseReference myRef;
     DatabaseReference Users;
     Context context;
     String place_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,27 +41,30 @@ public class showDetail extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
-        final DatabaseReference user = myRef.child("users").child(firebaseAuth.getCurrentUser().getUid().toString());
+        final DatabaseReference user = myRef.child("users").
+                child(firebaseAuth.getCurrentUser().getUid().toString());
         Users = myRef.child("Place").child(place_id).child("users");
         this.setTitle("Find Your Partner");
 
-
         myRef.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 List<String> userNames = new ArrayList<>();
                 List<String> userContact = new ArrayList<>();
-                for (DataSnapshot user : dataSnapshot.child("Place").child(place_id).child("users").getChildren()) {
+                for (DataSnapshot user : dataSnapshot.child("Place").
+                        child(place_id).child("users").getChildren()) {
                     String userId = user.getKey().toString();
-                    //alert(userId);
-                    String contact = dataSnapshot.child("users").child(userId).child("contact").getValue().toString();
+                    String contact;
+                    if (dataSnapshot.child("users").child(userId).child("contact").getValue() == null)
+                        contact = "Call My Name";
+                    else
+                        contact = dataSnapshot.child("users").child(userId).child("contact").
+                                getValue().toString();
                     userNames.add(user.getValue().toString());
                     userContact.add(contact);
                 }
                 String[] users = new String[userNames.size()];
                 String[] contacts = new String[userContact.size()];
-                //alert(contacts[0]);
                 for(int i = 0; i < users.length; i++) {
                     users[i] = userNames.get(i);
                     contacts[i] = userContact.get(i);
@@ -73,15 +80,18 @@ public class showDetail extends AppCompatActivity {
             }
         });
 
-
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 user.addValueEventListener(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Users.child(firebaseAuth.getCurrentUser().getUid().toString()).setValue(dataSnapshot.child("name").getValue().toString());
+                        if (dataSnapshot.child("name").getValue() == null)
+                            Users.child(firebaseAuth.getCurrentUser().getUid().toString()).
+                                    setValue("Anonymity");
+                        else
+                            Users.child(firebaseAuth.getCurrentUser().getUid().toString()).
+                                    setValue(dataSnapshot.child("name").getValue().toString());
                     }
 
                     @Override
@@ -89,7 +99,6 @@ public class showDetail extends AppCompatActivity {
 
                     }
                 });
-                //Users.child(firebaseAuth.getCurrentUser().getUid().toString()).setValue(firebaseAuth.getCurrentUser().getDisplayName().toString());
             }
         });
     }
@@ -97,5 +106,10 @@ public class showDetail extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public void back_to_search(View v) {
+        Intent i = new Intent(ShowDetail.this, MainActivity.class);
+        startActivity(i);
     }
 }

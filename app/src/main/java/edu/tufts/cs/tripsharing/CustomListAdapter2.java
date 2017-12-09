@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * Created by tainingzhang on 17/11/16.
- */
+/* The sidebar (the secondary functionality, not completed). */
 
 public class CustomListAdapter2 extends ArrayAdapter<String>{
     String[] username;

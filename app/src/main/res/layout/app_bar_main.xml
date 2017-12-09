@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tainingzhang.tripsharing_v0.edu.example.tainingzhang.tripsharing_v0.MainActivity">
+    tools:context="edu.tufts.cs.tripsharing..MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
